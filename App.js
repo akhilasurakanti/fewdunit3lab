@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import './App.css'; // Optional, if you add extra styles
 
-export default function App() {
+export default function FocusBlurComponent() {
   const [isFocused, setIsFocused] = useState(false);
   const [hoveredElement, setHoveredElement] = useState(null);
+  const [text, setText] = useState('Click here to focus');
+
+  const handleButtonClick = () => {
+    setText('Text updated after button click!');
+  };
 
   return (
     <div className="p-8">
@@ -17,16 +21,23 @@ export default function App() {
           isFocused ? 'outline outline-2 outline-green-500 bg-green-100' : ''
         } ${hoveredElement === 'text' ? 'blur-sm' : ''}`}
       >
-        Click here to focus
+        {text}
       </h2>
 
       <img
-        src="th.jpeg"
+        src="https://via.placeholder.com/150"
         alt="Sample"
         onMouseEnter={() => setHoveredElement('image')}
         onMouseLeave={() => setHoveredElement(null)}
         className={`w-40 h-40 ${hoveredElement === 'image' ? 'blur-sm' : ''}`}
       />
+
+      <button
+        onClick={handleButtonClick}
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        Update Text
+      </button>
     </div>
   );
 }
